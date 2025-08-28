@@ -28,7 +28,7 @@ PASSWORD = SMTP_PASSWORD
 # Lista de Códigos de Lojas
 codigos_lojas = [
     "007162", "008333", "011996", "012268", "012396", "012674", "013003", "013391", "013557", 
-    "013793", "017868", "019386", "019530", "019964", "020843", "020844", "020845", "020846", 
+    "017868", "019386", "019530", "019964", "020843", "020844", "020845", "020846", 
     "021045", "021056", "021057", "021058", "021059", "021060", "021061", "021062", "021207",
     "021274", "021372", "022631", "022744", "023252", "023263", "023264", "023269", "023666", 
     "023667", "911557"
@@ -114,7 +114,7 @@ for i, valor_loja_desejada in enumerate(codigos_lojas): # Iterar sobre os códig
                     data = comentario_element.find_element(By.XPATH, './/span[@data-test-name="comment-date"]').text.strip() # Extrair a data
                     loja_formatada = dicionario_lojas[valor_loja_atual] # Armazenar a loja sem os zeros à esquerda
                     lojas_comentarios.append({"Loja": loja_formatada, "Comentario": comentario, "Nota": nota, "Data": data})# Adicionar os dados à lista ou processá-los conforme necessário
-                    print(f"Loja: {loja_formatada}\nComentário: {comentario}\nNota: {nota}\nData: {data}\n")
+                    # print(f"Loja: {loja_formatada}\nComentário: {comentario}\nNota: {nota}\nData: {data}\n") # Exibe todos os comentário daquela loja
                 except Exception as e:
                     print(f"Erro ao processar o comentário: {e}")
         else:
