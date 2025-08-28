@@ -53,30 +53,30 @@ def aplicar_filtro_periodo(driver, min_data, max_data, xpath_inicio, xpath_fim, 
     # Abrir filtro
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, xpath_abrir_filtro)))
     driver.find_element(By.XPATH, xpath_abrir_filtro).click()
-    time.sleep(1)
+    time.sleep(2)
     # Abrir calendário
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, xpath_abrir_calendario)))
     driver.find_element(By.XPATH, xpath_abrir_calendario).click()
-    time.sleep(1)
+    time.sleep(2)
     # Preencher datas
     driver.find_element(By.XPATH, xpath_inicio).send_keys(min_data)
     driver.find_element(By.XPATH, xpath_fim).send_keys(max_data)
     # Remover filtro programa de pesquisas
     driver.find_element(By.XPATH, xpath_programa_pesquisa).click()
-    time.sleep(1)
+    time.sleep(2)
 
 def selecionar_loja(driver, codigo_loja, xpath_lista_lojas, xpath_checkbox_loja, xpath_aplicar, abrir_lista=True):
-    time.sleep(1)
+    time.sleep(2)
     if abrir_lista:
         WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, xpath_lista_lojas)))
         driver.find_element(By.XPATH, xpath_lista_lojas).click()
-        time.sleep(1)
+        time.sleep(2)
     checkbox_xpath = xpath_checkbox_loja.format(codigo_loja)
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, checkbox_xpath)))
     driver.find_element(By.XPATH, checkbox_xpath).click()
-    time.sleep(1)
-    driver.find_element(By.XPATH, xpath_aplicar).click()
     time.sleep(2)
+    driver.find_element(By.XPATH, xpath_aplicar).click()
+    time.sleep(5)
 
 def desmarcar_loja(driver, codigo_loja, xpath_abrir_filtro, xpath_lista_lojas, xpath_checkbox_loja):
     # Abrir filtro
@@ -169,7 +169,7 @@ def main():
     # Abrir lista de lojas para capturar os códigos disponíveis
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, xpath_lista_lojas)))
     driver.find_element(By.XPATH, xpath_lista_lojas).click()
-    time.sleep(1)
+    time.sleep(3)
 
     # Capturar todos os códigos disponíveis
     botoes_lojas = driver.find_elements(By.XPATH, '//button[@data-label]')
@@ -177,7 +177,7 @@ def main():
 
     # Fechar o dropdown de lojas após capturar os códigos
     driver.find_element(By.XPATH, xpath_lista_lojas).click()
-    time.sleep(1)
+    time.sleep(2)
 
     resultados = []
 
@@ -194,6 +194,7 @@ def main():
                 avaliacoes_xpath = avaliacoes_xpath_default
             dados_loja = extrair_dados_loja(driver, codigo_loja, avaliacoes_xpath, min_data, max_data)
             resultados.extend(dados_loja)
+            print(f"Dados extraídos da loja {codigo_loja}")
         except Exception as e:
             print(f"Erro ao extrair dados da loja {codigo_loja}: {e}")
 
